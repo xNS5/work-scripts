@@ -2,17 +2,17 @@
 
 Information required:
 
-1. Bonjour Name
+1. ~~ Bonjour Name ~~
 
-2. Device Name
+2. ~~ Device Name ~~
 
-3. OS Version
+3. ~~ OS Version ~~
 
 4. Disk space information (total/used/available)
 
-5. IP address
+5. ~~ IP address ~~
 
-6. Last signed in use
+6. ~~ Last signed in user ~~
 
 7. 3rd party software installed
 
