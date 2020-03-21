@@ -27,4 +27,8 @@ Potential Ideas:
 
 
 Computer Information:
-VU412-iMac1
+VU412-iMac1 - 140.160.164.232
+
+# Notes
+
+scutil --get LocalHostName / ComputerName
