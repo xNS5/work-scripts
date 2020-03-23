@@ -26,6 +26,8 @@ scutil --get LocalHostName / ComputerName
 How to get storage info
 system_profiler SPStorageDataType
 
+SSH without a password: generate SSH key from Jeremy's computer > other
+
 iMac locations:
 
 PC 412

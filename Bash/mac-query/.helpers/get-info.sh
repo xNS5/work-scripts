@@ -14,7 +14,19 @@ sw_vers -productVersion
 
 # Disk Space Information
 echo -n "Total Disk Space: "
-diskutil info disk1 | grep "Disk Size" | awk '{print $3}'
+storage=`system_profiler iSPStorageDataType`
+available=$( $storage | grep "Available" )
+free=$( $storage | grep "Free")
+
+if $available;
+then
+   echo $available
+else 
+   echo $free
+fi
+
+
+
 
 # Computer IP address
 echo -n "IP Address: "

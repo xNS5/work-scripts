@@ -1,15 +1,8 @@
 #!/usr/bin/bash
 
-echo -n "Please drag and drop .txt file here: "
-read path
-echo
-echo -n "Please input Vumaint password: "
-read -s  password
-echo
-while IFS= read -r line;
-do
-   echo $line
-done < temp.txt
-echo "Beginning Program"
+tempIP="140.160.164.232"
 
-
+# echo -n "Please drag and drop .txt file here: "
+# read path
+echo
+ssh vumaint@$tempIP 'bash -s' < temp.sh
