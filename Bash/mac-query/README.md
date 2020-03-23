@@ -22,3 +22,14 @@ VU412-iMac1 - 140.160.164.232
 # Notes
 
 scutil --get LocalHostName / ComputerName
+
+How to get storage info
+system_profiler SPStorageDataType
+
+iMac locations:
+
+PC 412
+Videographer ?? 
+VU ITS 519
+
+
