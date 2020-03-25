@@ -13,20 +13,20 @@ echo -n "OS Version: "
 sw_vers -productVersion
 
 # Disk Space Information
-echo -n "Total Disk Space: "
-storage=`system_profiler iSPStorageDataType`
-available=$( $storage | grep "Available" )
-free=$( $storage | grep "Free")
+available="$(system_profiler SPStorageDataType | grep -m1 "Available" | xargs)"
+free="$(system_profiler SPStorageDataType | grep -m1 "Free" | xargs)"
+capacity="$(system_profiler SPStorageDataType | grep -m1 "Capacity" | xargs)"
+availableLen="${#available}"
 
-if $available;
+if [[ $availableLen -ne 0 ]];
 then
    echo $available
-else 
+   echo $capacity
+else
    echo $free
+   echo $capacity
+   
 fi
-
-
-
 
 # Computer IP address
 echo -n "IP Address: "
