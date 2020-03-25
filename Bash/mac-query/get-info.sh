@@ -14,17 +14,22 @@ sw_vers -productVersion
 
 # Disk Space Information
 available="$(system_profiler SPStorageDataType | grep -m1 "Available" | xargs)"
-free="$(system_profiler SPStorageDataType | grep -m1 "Free" | xargs)"
 capacity="$(system_profiler SPStorageDataType | grep -m1 "Capacity" | xargs)"
 availableLen="${#available}"
 
 if [[ $availableLen -ne 0 ]];
 then
+   echo -n "Space "
    echo $available
+   echo -n "Space "
    echo $capacity
 else
+   free="$(system_profiler SPStorageDataType | grep -m1 "Free" | xargs)"
+   echo -n "Space "
    echo $free
+   echo -n "Total "
    echo $capacity
+   echo $free |  awk '{print $4}' | sed 's/[^0-9]*//g'
    
 fi
 
