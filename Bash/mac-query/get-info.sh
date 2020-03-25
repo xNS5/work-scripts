@@ -12,26 +12,40 @@ scutil --get ComputerName
 echo -n "OS Version: "
 sw_vers -productVersion
 
+
 # Disk Space Information
-available="$(system_profiler SPStorageDataType | grep -m1 "Available" | xargs)"
-capacity="$(system_profiler SPStorageDataType | grep -m1 "Capacity" | xargs)"
-availableLen="${#available}"
+
+echo "DISK INFO:"
+echo 
+
+AVAILABLE="$(system_profiler SPStorageDataType | grep -m1 "Available" | xargs)"
+CAPACITY="$(system_profiler SPStorageDataType | grep -m1 "Capacity" | xargs)"
+availableLen="${#AVAILABLE}"
 
 if [[ $availableLen -ne 0 ]];
 then
    echo -n "Space "
-   echo $available
+   echo $AVAILABLE
    echo -n "Space "
-   echo $capacity
+   echo $CAPACITY
+   BITSFREE="$(echo $AVAILABLE | awk '{print $4}' | sed  's/[^0-9]*//g')"
+   BITSTOTAL="$(echo $CAPACITY | awk '{print $4}' | sed 's/[^0-9]*//g')"
+   printf "Percent Used: %.2f%s\n" "$(bc <<< "scale=4; (1-($BITSFREE/$BITSTOTAL))*100")"
+   printf "Percent Free: %.2f%s\n" "$(bc <<< "scale=4; ($BITSFREE/$BITSTOTAL)*100")"
+
 else
-   free="$(system_profiler SPStorageDataType | grep -m1 "Free" | xargs)"
+   FREE="$(system_profiler SPStorageDataType | grep -m1 "Free" | xargs)"
    echo -n "Space "
-   echo $free
+   echo $FREE
    echo -n "Total "
-   echo $capacity
-   echo $free |  awk '{print $4}' | sed 's/[^0-9]*//g'
+   echo $CAPACITY
+   BITSFREE="$(echo $FREE | awk '{print $4}' | sed  's/[^0-9]*//g')"
+   BITSTOTAL="$(echo $CAPACITY | awk '{print $4}' | sed 's/[^0-9]*//g')"
+   printf "Percent Used: %.2f%s\n" "$(bc <<< "scale=4; (1-($BITSFREE/$BITSTOTAL))*100")"
+   printf "Percent Free: %.2f%s\n" "$(bc <<< "scale=4; ($BITSFREE/$BITSTOTAL)*100")"
    
 fi
+echo
 
 # Computer IP address
 echo -n "IP Address: "
