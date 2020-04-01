@@ -8,7 +8,7 @@ Information required:
 
 3. ~~OS Version~~
 
-4. Disk space information (total/used/available)
+4. ~~ Disk space information (total/used/available) ~~
 
 5. ~~IP address~~
 
@@ -16,22 +16,12 @@ Information required:
 
 7. 3rd party software installed
 
-Computer Information:
-VU412-iMac1 - 140.160.164.232
+# To Do
 
-# Notes
+1. Fix output for last signed in user
 
-scutil --get LocalHostName / ComputerName
+2. Fix SSH key from Jeremy's account
 
-How to get storage info
-system_profiler SPStorageDataType
-
-SSH without a password: generate SSH key from Jeremy's computer > other
-
-iMac locations:
-
-PC 412
-Videographer ?? 
-VU ITS 519
+3. Write script for application information
 
 
