@@ -1,20 +1,21 @@
 #!/usr/bin/bash
 
 # Bonjour Name
-#echo -n "Bonjour Name: "
 scutil --get LocalHostName
+
 # Computer Name
-#echo -n "Computer Name: "
 scutil --get ComputerName
+
 # OS Version
-#echo -n "OS Version: "
 sw_vers -productVersion
+
 # Disk Space Information 
 
 AVAILABLE="$(system_profiler SPStorageDataType | grep -m1 "Available" | xargs)"
 CAPACITY="$(system_profiler SPStorageDataType | grep -m1 "Capacity" | xargs)"
 availableLen="${#AVAILABLE}"
 
+# MacOS Catalina differs from Mojave in that it uses "free" instead of "available" when doing a system_profiler query
 if [[ $availableLen -ne 0 ]];
 then
    #Total Available
@@ -44,11 +45,9 @@ else
 fi
 
 # Computer IP address
-# echo -n "IP Address: "
 ifconfig en0 | grep "inet " | awk '{print $2}'
 
 
 # Last user signed in
-#echo -n "Last user: "
-last -2 | awk '{print $1}' | sed -n '2 p'
+last -2 | grep -v -e 'reboot' -e 'shutdown' | awk '{print $1}' | sed -n '2 p'
 
