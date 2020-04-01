@@ -8,7 +8,7 @@ Information required:
 
 3. ~~OS Version~~
 
-4. ~~ Disk space information (total/used/available) ~~
+4. ~~Disk space information (total/used/available)~~
 
 5. ~~IP address~~
 
@@ -16,12 +16,14 @@ Information required:
 
 7. 3rd party software installed
 
+8. Computer Temp?
+
 # To Do
 
-1. Fix output for last signed in user
+1. ~~Fix output for last signed in user~~
 
 2. Fix SSH key from Jeremy's account
 
 3. Write script for application information
 
-
+4. Write documentation for scripts and processes
