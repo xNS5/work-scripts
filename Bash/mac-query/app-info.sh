@@ -1,14 +1,11 @@
 #!/usr/bin/bash
 
-#profiler="$(system_profiler -detailLevel mini SPApplicationsDataType | grep -v -e "Get Info String" -e "Signed by" -e "Last Modified" -e "Obtained From" -e "Copyright")"
+#echo $(defaults read /Aplications/Runescape.app/Contents/Info.plist CFBundleShortVersionString) # this gets the application version information
 
-appNames="$(ls -1 /Applications/)"
 
-#echo $(defaults read /Aplications/Runescape.app/Contents/Info.plist CFBundleShortVersionString)
-
-for app in $appNames
+while read -r line
 do
-   echo $app
-done
 
-
+   version="$(defaults read /Applications/"$line"/Contents/Info.plist "CFBundleShortVersionString")"
+   printf "$line Version: %s\n" $version
+done < <( ls -1 /Applications/ | grep -v "Utilities")

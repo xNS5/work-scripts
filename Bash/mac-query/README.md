@@ -18,6 +18,8 @@ Information required:
 
 8. Computer Temp?
 
+9. Create setup script for new computers
+
 # To Do
 
 1. ~~Fix output for last signed in user~~
