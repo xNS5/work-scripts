@@ -24,7 +24,7 @@ Information required:
 
 1. ~~Fix output for last signed in user~~
 
-2. Fix SSH key from Jeremy's account
+2. ~~Fix SSH key from Jeremy's account~~
 
 3. Write script for application information -- IN PROGRESS
 
