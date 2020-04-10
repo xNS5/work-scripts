@@ -18,9 +18,9 @@ availableLen="${#AVAILABLE}"
 # MacOS Catalina differs from Mojave in that it uses "free" instead of "available" when doing a system_profiler query
 if [[ $availableLen -ne 0 ]];
 then
-   #Total Available
+   #Total available space
    echo $AVAILABLE | awk '{print $2 " " $3}'
-   #Total Capacity 
+   #Total space capacity
    echo $CAPACITY | awk '{print $2 " " $3}'
    BITSFREE="$(echo $AVAILABLE | awk '{print $4}' | sed  's/[^0-9]*//g')"
    BITSTOTAL="$(echo $CAPACITY | awk '{print $4}' | sed 's/[^0-9]*//g')"
@@ -47,7 +47,5 @@ fi
 # Computer IP address
 ifconfig en0 | grep "inet " | awk '{print $2}'
 
-
 # Last user signed in
 last -2 | grep -v -e 'reboot' -e 'shutdown' | awk '{print $1}' | sed -n '2 p'
-

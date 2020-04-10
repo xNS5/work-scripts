@@ -1,20 +1,27 @@
 #!/usr/bin/bash
 
-#echo $(defaults read /Aplications/Runescape.app/Contents/Info.plist CFBundleShortVersionString) # this gets the application version information
+appName=""
+appVersion=""
 
-
-function main(){
 while read -r line
 do
-  if [[ "$line" != "Utilities" || "$line" != "Python" ]]; then
-   version="$(defaults read /Applications/"$line"/Contents/Info.plist "CFBundleShortVersionString" 2>/dev/null)"
-   printf "$line Version: %s\n" $version
- fi
-done< <( ls -1 /Applications/ )
-}
+   appName=$line
+   appVersion="$(defaults read /Applications/"$line"/Contents/Info.plist "CFBundleShortVersionString" 2>/dev/null)"
+   if [[ $? -ne 0 ]]; then
+      while read -r subLine
+      do
+         subVersion="$(defaults read "$subline"/Contents/Info.plist "CFBundleShortVersionString")"
+         echo "$subLine"
+         if [[ $? -eq 0 ]]; then
+           appVersion="$subVersion"
+           appName="$subLine"
+        fi
+      done< <(find $line/* -maxdepth 0 2>/dev/null | grep -e ".app")
+   fi
 
-function subVersion(){
-  echo "Hello!"
-}
+   if [[ ${#appVersion} -ne 0 ]]; then
+      printf "%s Version: %s\n" "$appName" "$appVersion"
+   fi
+done< <( find /Applications/* -maxdepth 0 2>/dev/null | sed -e 's/\/Applications\///g' | grep -v -e "Python" | grep -v -e "Utilities")
 
-main
+
