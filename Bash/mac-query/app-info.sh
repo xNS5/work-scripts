@@ -14,9 +14,9 @@ do
          subVersion="$(defaults read "$subLine"/Contents/Info.plist "CFBundleShortVersionString" 2>/dev/null)"
          if [[ $? -eq 0 ]]; then
            appVersion="$subVersion"
-           appName="$subLine"
+           appName="$( "$subLine" |  sed -e 's/(\/Applications\/).*(\/)//g')"
         fi
-      done< <(find /Applications/"$line"/* -maxdepth 0 2>/dev/null | grep ".app")
+     done< <(find /Applications/"$line"/* -maxdepth 0 | grep ".app")
    fi
 
    if [[ ${#appVersion} -ne 0 ]]; then
@@ -26,6 +26,6 @@ do
    fi
 
 #   set +x
-done< <( find /Applications/* -maxdepth 0 2>/dev/null | sed -e 's/\/Applications\///g')
+done< <( find /Applications/* -maxdepth 0 2>/dev/null | sed -e 's/\/Applications\///g' | grep "Intel Power Gadget")
 
 
