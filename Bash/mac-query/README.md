@@ -14,9 +14,7 @@ Information required:
 
 6. ~~Last signed in user~~
 
-7. 3rd party software installed -- IN PROGRESS
-
-8. Computer Temp?
+7. ~~3rd party software installe ~~
 
 9. Create setup script for new computers
 
@@ -26,6 +24,6 @@ Information required:
 
 2. ~~Fix SSH key from Jeremy's account~~
 
-3. Write script for application information -- IN PROGRESS
+3. ~~Write script for application information~~
 
 4. Write documentation for scripts and processes
