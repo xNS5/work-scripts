@@ -5,27 +5,26 @@ appVersion=0
 
 while read -r line
 do
-  set -x
-   appName=$line
-   appVersion="$(defaults read /Applications/"$appName"/Contents/Info.plist "CFBundleShortVersionString" 2>/dev/null)"
+   #set -x
+   appName="$line"
+   appVersion="$(defaults read /Applications/"$line"/Contents/Info.plist "CFBundleShortVersionString" 2>/dev/null)"
    if [[ $? -ne 0 ]]; then
       while read -r subLine
       do
+      #   if [[ "$line"
          subVersion="$(defaults read "$subLine"/Contents/Info.plist "CFBundleShortVersionString" 2>/dev/null)"
          if [[ $? -eq 0 ]]; then
            appVersion="$subVersion"
-           appName="$( "$subLine" | sed -E 's/(\/Applications\/).*(\/)//g')" 
+           appName="$(echo "$subLine" | sed -E 's/(\/Applications\/)(.*\/)//g')"
          fi
-     done< <(find /Applications/"$line"/* -maxdepth 0 | grep ".app")
+     done< <(find /Applications/"$line"/* -maxdepth 0 2>/dev/null)
    fi
 
-   if [[ ${#appVersion} -ne 0 ]]; then
+   if [[ ${#appVersion} -ne 0 && ${#appName} -ne 0 ]]; then
       printf "%s Version: %s\n" "$appName" "$appVersion"
    else
       printf "%s Version: N/A\n" "$appName"
    fi
-
-   set +x
-done< <( find /Applications/* -maxdepth 0 2>/dev/null | sed -e 's/\/Applications\///g' | grep "Intel Power Gadget")
-
+   #set +x
+done< <( find /Applications/* -maxdepth 0 2>/dev/null | sed -e 's/\/Applications\///g')
 
