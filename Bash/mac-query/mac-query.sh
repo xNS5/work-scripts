@@ -7,6 +7,6 @@ addr="140.160.164.232"
 #do
    #deviceInfo="$(ssh vumaint@"$addr" 'bash -s' < get-info.sh)"
    #appInfo="$(ssh vumaint@"$addr" 'bash -s' < app-info.sh)"
-   output="$(ssh vumaint@"$addr" 'bash -s' < app-info.sh < get-info.sh)"
+   output="$(ssh vumaint@"$addr" 'bash -s' < computer_info.sh)"
    echo "$output"
 #done < $path
