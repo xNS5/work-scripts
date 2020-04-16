@@ -16,6 +16,8 @@ Information required:
 
 7. ~~3rd party software installe ~~
 
+8. Get RAM
+
 9. Create setup script for new computers
 
 # To Do
@@ -26,4 +28,6 @@ Information required:
 
 3. ~~Write script for application information~~
 
-4. Write documentation for scripts and processes
+4. ~~Write documentation for scripts and processes~~
+
+5. Get RAM info for machine (system_profiler SPHardwareDataType | Grep "Memory")
