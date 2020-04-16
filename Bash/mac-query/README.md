@@ -14,7 +14,7 @@ Information required:
 
 6. ~~Last signed in user~~
 
-7. ~~3rd party software installe ~~
+7. ~~3rd party software installed~~
 
 8. Get RAM
 
