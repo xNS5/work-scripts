@@ -37,7 +37,7 @@ else
    #Space Free
    printf "%s," "$(echo "$free" | awk '{print $2 $3}')"
    #Total Capacity
-   echo $capacity| awk '{print $2 $3}'
+   echo "$capacity"| awk '{print $2 $3}'
 
    BITSFREE="$(echo "$free" | awk '{print $4","}' | sed  's/[^0-9]*//g')"
    BITSTOTAL="$(echo "$capacity" | awk '{print $4","}' | sed 's/[^0-9]*//g')"
@@ -72,7 +72,7 @@ do
    appName="$line"
 
    # appVersion is the captured output from defaults read... and checks for number associated with "CFBundleShortVersionString".
-   # 2>/dev/null suppresses errors in the event that a CFBundleShortVersionString isn't found
+   # 2>/dev/null suppresses errors in the event that a CFBundleShortVersionString isn't found (which is expected behavior)
 
    # $? checks the exit status of the previously run command and moves 1 level deeper into .app file.
    # This is required for Adobe and some other applications.
