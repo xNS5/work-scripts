@@ -67,8 +67,6 @@ printf "%s" "$(scutil --get ComputerName)"
 # Line is the name of an application located in a computer's /Applications folder
 while read -r line
 do
-   #set -/+x is used for debugging.
-#   set -x
    appName="$line"
 
    # appVersion is the captured output from defaults read... and checks for number associated with "CFBundleShortVersionString".
@@ -100,6 +98,6 @@ do
    else
       printf ",%s,N/A\n" "$appName"
    fi
-#   set +x
+
 done< <( find /Applications/* -maxdepth 0 2>/dev/null | sed -e 's/\/Applications\///g' )
 
