@@ -37,7 +37,7 @@ else
    #Space Free
    printf "%s," "$(echo "$free" | awk '{print $2 $3}')"
    #Total Capacity
-   echo "$capacity"| awk '{print $2 $3}'
+   printf "%s," "$(echo "$capacity"| awk '{print $2 $3}')"
 
    BITSFREE="$(echo "$free" | awk '{print $4","}' | sed  's/[^0-9]*//g')"
    BITSTOTAL="$(echo "$capacity" | awk '{print $4","}' | sed 's/[^0-9]*//g')"
@@ -53,7 +53,7 @@ fi
 printf "%s," "$(ifconfig en0 | grep "inet " | awk '{print $2}')"
 
 # Last user signed in
-printf "%s\n" "$(last -2 | grep -v -e 'reboot' -e 'shutdown' | awk '{print $1}' | sed -n '2 p')"
+printf "%s\n" "$(last | grep -v -e 'reboot' -e 'shutdown' -e 'vumaint' | sed -n '2 p' | awk '{print $1}')"
 
 #=======================================================================================================================
 # Application Information: Name and Version
@@ -95,11 +95,11 @@ do
     appName="${appName//.app/}"
    fi
    # Checks if both appVersion and appName are valid
-   if [[ $appVersion && $appName ]]; then
+   if [[ $appVersion && $appName && $appVersion =~ [0-9] ]]; then
       printf ",%s,%s\n" "$appName" "$appVersion"
    else
       printf ",%s,N/A\n" "$appName"
    fi
 #   set +x
-done< <( find /Applications/* -maxdepth 0 2>/dev/null | sed -e 's/\/Applications\///g')
+done< <( find /Applications/* -maxdepth 0 2>/dev/null | sed -e 's/\/Applications\///g' )
 
