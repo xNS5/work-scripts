@@ -17,7 +17,7 @@ while IFS= read -r addr || [ -n "$addr" ];
 do
         start="$(date +%s)"
         printf "Beginning Query On: %s\n" "$addr"
-        output="$(ssh vumaint@"$addr" 'bash -s' < computer_info.sh &)"
+        output="$(ssh vumaint@"$addr" 'bash -s' < computer-info.sh &)"
         echo "$output" | sed -n '1 p' >> computer_info.csv
         echo "$output" | sed -n '2,$p' >> application_info.csv
         wait
