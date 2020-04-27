@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 
 #set -x
+set -m
 if [[ $1 ]]; then
     file=$1
 else
@@ -14,11 +15,12 @@ printf "Computer Name,Application Name, Application Version\n" >> application_in
 overallStart="$(date +%s)"
 while IFS= read -r addr || [ -n "$addr" ];
 do
-        printf "Beginning Query On: %s\n" "$addr"
         start="$(date +%s)"
-        output="$(ssh vumaint@"$addr" 'bash -s' < computer_info.sh)"
+        printf "Beginning Query On: %s\n" "$addr"
+        output="$(ssh vumaint@"$addr" 'bash -s' < computer_info.sh)" &
         echo "$output" | sed -n '1 p' >> computer_info.csv
         echo "$output" | sed -n '2,$p' >> application_info.csv
+        wait
         end="$(date +%s)"
         printf "Completed: $addr\nTime: %s seconds\n" "$((end-start))"
 done < "$file"
